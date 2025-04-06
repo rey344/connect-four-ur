@@ -46,7 +46,43 @@ class ConnectFour:
                 self.board[row][col] = self.current_player
                 return True
         return False  # Column was full
+    
+    def check_winner(self):
+        """
+        Efficiently checks the board for a winner by scanning from bottom to top.
+        Returns:
+            - 'R' if Red wins
+            - 'Y' if Yellow wins
+            - 'Draw' if no more legal moves
+            - None if the game is still ongoing
+        """
+        directions = [(0, 1), (1, 0), (1, 1), (-1, 1)]  # right, down, diag down-right, diag up-right
 
+        for row in reversed(range(ROWS)):  # bottom to top
+            for col in range(COLUMNS):
+                player = self.board[row][col]
+                if player == EMPTY:
+                    continue
+
+                for dr, dc in directions:
+                    r, c = row, col
+                    count = 0
+                    while (
+                        0 <= r < ROWS and
+                        0 <= c < COLUMNS and
+                        self.board[r][c] == player
+                    ):
+                        count += 1
+                        if count == 4:
+                            return player
+                        r += dr
+                        c += dc
+
+        # No winner — check for draw
+        if not self.get_legal_moves():
+            return 'Draw'
+
+        return None
 
 def load_board_from_file(filename):
     """
@@ -62,7 +98,6 @@ def load_board_from_file(filename):
         board_lines = [file.readline().strip() for _ in range(ROWS)]
         board = [list(row) for row in board_lines]
     return algorithm, current_player, board
-
 
 def main():
     """
