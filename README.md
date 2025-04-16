@@ -41,7 +41,7 @@ R
 To run a single game simulation, use the following command:
 
 ```bash
-python connectFour.py <input_file> <verbosity> <parameter>
+python3 connectFour.py <input_file> <verbosity> <parameter>
 ```
 - &lt;input_file&gt;: Path to a board configuration file (e.g., boards/test1.txt).
 - &lt;verbosity&gt;: Output detail level (options: None, Brief, Verbose).
@@ -55,7 +55,7 @@ The tournament script run_tournament.py runs a series of match-ups between diffe
 
 To run the tournament, execute:
 ```bash
-python run_tournament.py
+python3 run_tournament.py
 ```
 ---
 
@@ -63,7 +63,7 @@ python run_tournament.py
 
 A test suite is provided in the test/ directory. For example, to run the tests for the Improved UCT UCB strategy, use:
 ```bash
-python test/test_improved_ucb.py
+python3 test/test_improved_ucb.py
 ```
 ---
 
